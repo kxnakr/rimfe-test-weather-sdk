@@ -1,1 +1,1 @@
-export { WeatherClient, type ClientOptions } from "./client";
+export { WeatherClient, getCurrent, type ClientOptions } from "./client";
