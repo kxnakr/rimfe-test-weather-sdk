@@ -43,3 +43,8 @@ export class WeatherClient {
     }
   }
 }
+
+/** Returns current conditions for a city. */
+export async function getCurrent(city: string, units: "metric" | "imperial" = "metric") {
+  return new WeatherClient({ apiKey: process.env.WEATHER_API_KEY ?? "" }).request(`/current?city=${city}&units=${units}`);
+}
