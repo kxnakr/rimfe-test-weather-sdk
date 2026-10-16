@@ -5,6 +5,8 @@ export interface ClientOptions {
   timeoutMs?: number;
   /** Number of retries for 5xx responses. */
   retries?: number;
+  /** Appended to the User-Agent header. */
+  userAgent?: string;
 }
 
 export class WeatherClient {
@@ -30,7 +32,10 @@ export class WeatherClient {
     let attempt = 0;
     while (true) {
       const res = await fetch(`https://api.acme-weather.dev/v1${path}`, {
-        headers: { Authorization: `Bearer ${this.options.apiKey}` },
+        headers: {
+          Authorization: `Bearer ${this.options.apiKey}`,
+          "User-Agent": `acme-weather-sdk/1.2.0 ${this.options.userAgent ?? ""}`.trim(),
+        },
         signal: AbortSignal.timeout(this.timeoutMs),
       });
       if (res.status < 500 || attempt >= this.retries) return res.json();
