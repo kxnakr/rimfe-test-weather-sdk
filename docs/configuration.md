@@ -5,7 +5,8 @@
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
 | `apiKey` | string | required | API key from the Acme dashboard. |
-| `timeoutMs` | number | `10000` | Request timeout in milliseconds. |
+| `baseUrl` | string | `https://api.acme-weather.dev/v1` | Override the API host, for example a regional endpoint. |
+| `timeoutMs` | number | `30000` | Request timeout in milliseconds. |
 | `retries` | number | `2` | Retries for 5xx responses. |
 
 The client throws `Error("apiKey is required")` when the key is missing.
