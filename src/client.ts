@@ -27,14 +27,12 @@ export class WeatherClient {
   }
 
   private async request(path: string) {
-    let attempt = 0;
-    while (true) {
+    for (let attempt = 0; ; attempt += 1) {
       const res = await fetch(`https://api.acme-weather.dev/v1${path}`, {
         headers: { Authorization: `Bearer ${this.options.apiKey}` },
         signal: AbortSignal.timeout(this.timeoutMs),
       });
       if (res.status < 500 || attempt >= this.retries) return res.json();
-      attempt += 1;
     }
   }
 }
