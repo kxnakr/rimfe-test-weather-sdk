@@ -5,6 +5,8 @@ export interface ClientOptions {
   timeoutMs?: number;
   /** Number of retries for 5xx responses. */
   retries?: number;
+  /** Override the API host, for example a regional endpoint. */
+  baseUrl?: string;
 }
 
 export class WeatherClient {
@@ -13,12 +15,12 @@ export class WeatherClient {
 
   constructor(private readonly options: ClientOptions) {
     if (!options.apiKey) throw new Error("apiKey is required");
-    this.timeoutMs = options.timeoutMs ?? 10_000;
+    this.timeoutMs = options.timeoutMs ?? 30_000;
     this.retries = options.retries ?? 2;
   }
 
   async forecast(city: string, days = 3) {
-    if (days < 1 || days > 7) throw new RangeError("days must be between 1 and 7");
+    if (days < 1 || days > 14) throw new RangeError("days must be between 1 and 14");
     return this.request(`/forecast?city=${encodeURIComponent(city)}&days=${days}`);
   }
 
@@ -29,7 +31,7 @@ export class WeatherClient {
   private async request(path: string) {
     let attempt = 0;
     while (true) {
-      const res = await fetch(`https://api.acme-weather.dev/v1${path}`, {
+      const res = await fetch(`${this.options.baseUrl ?? "https://api.acme-weather.dev/v1"}${path}`, {
         headers: { Authorization: `Bearer ${this.options.apiKey}` },
         signal: AbortSignal.timeout(this.timeoutMs),
       });
