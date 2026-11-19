@@ -1,3 +1,2 @@
 {
-  "docsGlobs": ["docs/**/*.md", "README.md"]
-}
+  "docsGlobs": ["docs/**/*.md",
