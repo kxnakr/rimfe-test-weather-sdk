@@ -14,7 +14,7 @@ export class WeatherClient {
   constructor(private readonly options: ClientOptions) {
     if (!options.apiKey) throw new Error("apiKey is required");
     this.timeoutMs = options.timeoutMs ?? 10_000;
-    this.retries = options.retries ?? 2;
+    this.retries = options.retries ?? 3;
   }
 
   async forecast(city: string, days = 3) {
