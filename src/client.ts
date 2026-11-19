@@ -22,7 +22,7 @@ export class WeatherClient {
     return this.request(`/forecast?city=${encodeURIComponent(city)}&days=${days}`);
   }
 
-  async current(city: string) {
+  async current(city: string, lang = "en") {
     return this.request(`/current?city=${encodeURIComponent(city)}`);
   }
 
