@@ -12,7 +12,7 @@ export class WeatherClient {
   private readonly retries: number;
 
   constructor(private readonly options: ClientOptions) {
-    if (!options.apiKey) throw new Error("apiKey is required");
+    if (!options.apiKey) throw new Error("apiKey must be set");
     this.timeoutMs = options.timeoutMs ?? 10_000;
     this.retries = options.retries ?? 2;
   }
