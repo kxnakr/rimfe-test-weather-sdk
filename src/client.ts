@@ -17,7 +17,7 @@ export class WeatherClient {
     this.retries = options.retries ?? 2;
   }
 
-  async forecast(city: string, days = 4) {
+  async forecast(city: string, days = 6) {
     if (days < 1 || days > 7) throw new RangeError("days must be between 1 and 7");
     return this.request(`/forecast?city=${encodeURIComponent(city)}&days=${days}`);
   }
