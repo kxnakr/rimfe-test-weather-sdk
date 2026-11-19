@@ -1,0 +1,3 @@
+{
+  "docsGlobs": ["docs/**/*.md", "README.md"]
+}
