@@ -8,3 +8,5 @@
 Values outside 1 to 7 throw a `RangeError`.
 
 `client.current(city)` returns current conditions.
+
+Forecasts are cached for ten minutes.
